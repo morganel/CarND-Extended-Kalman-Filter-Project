@@ -31,7 +31,7 @@ public:
   KalmanFilter ekf_;
 
 private:
-  // check whether the tracking toolbox was initiallized or not (first measurement)
+  // check whether the tracking toolbox was initialized or not (first measurement)
   bool is_initialized_;
 
   // previous timestamp
@@ -43,6 +43,8 @@ private:
   MatrixXd R_radar_;
   MatrixXd H_laser_;
   MatrixXd Hj_;
+  float noise_ax;
+  float noise_ay;
 };
 
 #endif /* FusionEKF_H_ */

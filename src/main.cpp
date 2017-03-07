@@ -50,7 +50,6 @@ void check_files(ifstream& in_file, string& in_name,
 }
 
 int main(int argc, char* argv[]) {
-
   check_arguments(argc, argv);
 
   string in_file_name_ = argv[1];
@@ -69,8 +68,7 @@ int main(int argc, char* argv[]) {
   // prep the measurement packages (each line represents a measurement at a
   // timestamp)
   while (getline(in_file_, line)) {
-
-    string sensor_type;
+	string sensor_type;
     MeasurementPackage meas_package;
     GroundTruthPackage gt_package;
     istringstream iss(line);
@@ -133,9 +131,11 @@ int main(int argc, char* argv[]) {
 
   //Call the EKF-based fusion
   size_t N = measurement_pack_list.size();
+
   for (size_t k = 0; k < N; ++k) {
     // start filtering from the second frame (the speed is unknown in the first
     // frame)
+
     fusionEKF.ProcessMeasurement(measurement_pack_list[k]);
 
     // output the estimation
@@ -143,6 +143,7 @@ int main(int argc, char* argv[]) {
     out_file_ << fusionEKF.ekf_.x_(1) << "\t";
     out_file_ << fusionEKF.ekf_.x_(2) << "\t";
     out_file_ << fusionEKF.ekf_.x_(3) << "\t";
+
 
     // output the measurements
     if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::LASER) {
@@ -182,3 +183,4 @@ int main(int argc, char* argv[]) {
 
   return 0;
 }
+
